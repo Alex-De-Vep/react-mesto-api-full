@@ -129,11 +129,11 @@ function Main() {
             });
     }
 
-    function deleteCard(card) {
-        api.deleteCard(card._id)
+    function deleteCard() {
+        api.deleteCard(selectedCardDelete._id)
             .then(() => {
                 setCards((oldCards) =>
-                    oldCards.filter((oldCard) => oldCard._id !== card._id)
+                    oldCards.filter((oldCard) => oldCard._id !== selectedCardDelete._id)
                 );
                 closeAllPopups();
             })
@@ -186,14 +186,14 @@ function Main() {
             <Footer/>
 
             <EditProfilePopup onUpdateUser={handleUpdateUser} isOpen={isEditProfilePopupOpen}
-                              onClose={closeAllPopups} submitButton={buttonPopup}/>
+                              onClose={closeAllPopups} submitButton={buttonPopup} />
             <EditAvatarPopup onUpdateAvatar={handleUpdateAvatar} isOpen={isEditAvatarPopupOpen}
-                             onClose={closeAllPopups} submitButton={buttonPopup}/>
+                             onClose={closeAllPopups} submitButton={buttonPopup} />
             <AddPlacePopup onUpdatePlace={handleAddPlaceSubmit} isOpen={isAddPlacePopupOpen}
-                           onClose={closeAllPopups} submitButton={buttonPopup}/>
-            <PopupConfirm onSubmit={deleteCard} card={selectedCardDelete} isOpen={isPopupConfirm}
-                          onClose={closeAllPopups}/>
-            {selectedCard && <ImagePopup card={selectedCard} onClose={closeAllPopups}/>}
+                           onClose={closeAllPopups} submitButton={buttonPopup} />
+            <PopupConfirm onSubmit={deleteCard} isOpen={isPopupConfirm}
+                          onClose={closeAllPopups} />
+            {selectedCard && <ImagePopup card={selectedCard} onClose={closeAllPopups} />}
         </CurrentUserContext.Provider>
     );
 }
